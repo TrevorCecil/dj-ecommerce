@@ -17,8 +17,18 @@ Including another URLconf
 
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_view
+from .forms import LoginForm, MyPasswordResetForm
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('home/', views.index, name='index'),
     path('registration/', views.RegistrationView.as_view(), name='registration'),
+    path('',
+         auth_view.LoginView.as_view
+         (template_name='login.html',
+          authentication_form=LoginForm), name='login'),
+    path('password-reset/',
+         auth_view.PasswordResetView.as_view
+         (template_name='password_reset.html',
+          form_class=MyPasswordResetForm), name='password_reset')
 ]

@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .forms import RegisterForm
+from django.shortcuts import render,redirect
+from .forms import RegisterForm, LoginForm
 from django.views import View
 from django.contrib import messages
 
@@ -20,3 +20,5 @@ class RegistrationView(View):
         else:
             messages.warning(request, 'Something went wrong')
             return render(request,'customer_registration.html',locals())
+
+
